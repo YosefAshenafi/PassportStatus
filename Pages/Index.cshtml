@@ -1,0 +1,32 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "PDF Data Extractor";
+}
+
+<div class="container">
+    <h1 class="mb-4">PDF Data Extractor</h1>
+
+    <form method="post" enctype="multipart/form-data">
+        <div class="mb-3">
+            <label for="pdfFile" class="form-label">Upload PDF File</label>
+            <input type="file" class="form-control" id="pdfFile" asp-for="UploadedFile" accept=".pdf" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Process PDF</button>
+    </form>
+
+    @if (!string.IsNullOrEmpty(Model.ErrorMessage))
+    {
+        <div class="alert alert-danger mt-4" role="alert">
+            @Model.ErrorMessage
+        </div>
+    }
+
+    @if (!string.IsNullOrEmpty(Model.JsonResult))
+    {
+        <div class="mt-4">
+            <h3>Extracted Data:</h3>
+            <pre class="bg-light p-3 rounded"><code>@Model.JsonResult</code></pre>
+        </div>
+    }
+</div>
